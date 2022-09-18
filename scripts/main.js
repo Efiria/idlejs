@@ -151,7 +151,7 @@ class Player {
 		this.max_health = this.stats.stamina * 10
 		this.health = this.max_health
 		this.gold = 0
-		this.inventory = inventory
+		// this.inventory = inventory
 
 		let player_display = []
 		$.each( this, function( key, val ) {
