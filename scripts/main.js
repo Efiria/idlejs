@@ -188,6 +188,12 @@ class Player {
 		//damage = base_weapon_damage + (weapon_speed * Attack Power / 14)
 		let normalized_damage = base_weapon_damage + (X * this.stats.strenght / 14)
 	}
+
+	update_player() {
+		let health = '<div class="progress">'+
+			'<div class="progress-bar bg-success" role="progressbar" style="width:'+this.health/this.max_health*100+'%" aria-valuenow="'+this.health+'" aria-valuemin="0" aria-valuemax="'+this.max_health+'"></div>'+
+		'</div>'
+	}
 }
 
 class Monster {
@@ -241,6 +247,12 @@ $( "#btn-monster" ).click(function() {
 			items.push( "<li id='" + key + "'>" + key + " : "+ val + "</li>" );
 		}
 	  });
+
+	  	let health = '<div class="progress">'+
+			'<div class="progress-bar bg-success" role="progressbar" style="width:'+monster.health/monster.max_health*100+'%" aria-valuenow="'+monster.health+'" aria-valuemin="0" aria-valuemax="'+monster.max_health+'"></div>'+
+		'</div>'
+
+		items.push(health)
 	 
 	  $( "<ul/>", {
 		"class": "my-new-list",
