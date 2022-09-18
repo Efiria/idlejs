@@ -1,0 +1,47 @@
+{
+    "Warrior":{
+        "name" : "Warrior",
+        "default_stats" : {
+            "strenght"  : 5,
+            "stamina"   : 3,
+            "agility"   : 1,
+            "intelligence" : 1
+        },
+        "levelup_stats" : {
+            "strenght"  : 3,
+            "stamina"   : 2,
+            "agility"   : 1,
+            "intelligence" : 1
+        }
+    },
+    "Archer":{
+        "name" : "Archer",
+        "default_stats" : {
+            "strenght"  : 1,
+            "stamina"   : 3,
+            "agility"   : 5,
+            "intelligence" : 1
+        },
+        "levelup_stats" : {
+            "strenght"  : 1,
+            "stamina"   : 2,
+            "agility"   : 3,
+            "intelligence" : 1
+        }
+    },
+    "Mage":{
+        "name" : "Mage",
+        "default_stats" : {
+            "strenght"  : 1,
+            "stamina"   : 3,
+            "agility"   : 1,
+            "intelligence" : 5
+        },
+        "levelup_stats" : {
+            "strenght"  : 1,
+            "stamina"   : 2,
+            "agility"   : 1,
+            "intelligence" : 3
+        }
+    }
+}

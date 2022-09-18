@@ -1,0 +1,6 @@
+Stamina
+10
+ +100 Hit Points
+
+
+python3 -m http.server
