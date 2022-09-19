@@ -76,6 +76,7 @@ class Inventory {
 		this.add_Item(1,1,1)
 		this.add_Item(1,1,0)
 		this.add_Item(2,1,0)
+		this.add_Item(2,10,0)
 
 		this.update_Inventory()
 	}
@@ -186,7 +187,9 @@ class Player {
 	attack() {
 		//AP egal main stat (str, agi, int)
 		//damage = base_weapon_damage + (weapon_speed * Attack Power / 14)
-		let normalized_damage = base_weapon_damage + (X * this.stats.strenght / 14)
+		// let normalized_damage = base_weapon_damage + (X * this.stats.strenght / 14)
+		let normalized_damage = Math.round(200 + (2.6 * this.stats.strenght / 14))
+		console.log(normalized_damage)
 	}
 
 	update_player() {
@@ -228,6 +231,14 @@ $( "#btn-save" ).click(function() {
 	player.save(player)
 	console.log(player)
 });
+
+$( "#btn-player-attack" ).click(function() {
+	console.log('clicked')
+	setInterval(function(){ 
+		player.attack()
+	}, (2.6*1000));
+});
+
 
 $(".inventory-display").on('click', '.btn-item-sell', function () {
 	player_inventory.sell_Item($(this).attr("sell"))
