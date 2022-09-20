@@ -188,7 +188,7 @@ class Player {
 		//AP egal main stat (str, agi, int)
 		//damage = base_weapon_damage + (weapon_speed * Attack Power / 14)
 		// let normalized_damage = base_weapon_damage + (X * this.stats.strenght / 14)
-		let normalized_damage = Math.round(200 + (2.6 * this.stats.strenght / 14))
+		let normalized_damage = Math.round(2 + (1.6 * this.stats.strenght / 14))
 		console.log(normalized_damage)
 	}
 
@@ -206,6 +206,19 @@ class Monster {
 		this.level = level
 		this.max_health = this.stats.stamina * 10
 		this.health = this.max_health
+
+		//remove disabled on button btn-player-attack
+		$('#btn-player-attack').prop("disabled", false);
+	}
+
+	update_health(health) {
+		this.health -= health
+		if (this.health <= 0) {
+			console.log('dead')
+			$('#monster-healther-bar').attr("aria-valuenow", 0).css('width', '0%').text('')
+		} else {
+			$('#monster-healther-bar').attr("aria-valuenow", this.health).css('width', this.health/this.max_health*100+'%').text(this.health)
+		}
 	}
 }
 
@@ -213,6 +226,7 @@ class Monster {
 
 const player_inventory = new Inventory(new Object())
 const player = new Player(player_classes.Warrior.name, player_classes.Warrior.default_stats)
+let monster
 
 console.log(player)
 console.log(player_inventory)
@@ -234,9 +248,20 @@ $( "#btn-save" ).click(function() {
 
 $( "#btn-player-attack" ).click(function() {
 	console.log('clicked')
-	setInterval(function(){ 
+	player.combat = setInterval(function(){ 
 		player.attack()
-	}, (2.6*1000));
+		monster.update_health(player.stats.strenght)
+		if (monster.health <= 0) {
+			console.log('aaaa')
+			clear()
+		}
+
+		function clear() {
+            clearInterval(player.combat) 
+       return clear;
+	}
+
+	}, (1.6*1000));
 });
 
 
@@ -245,7 +270,7 @@ $(".inventory-display").on('click', '.btn-item-sell', function () {
 });
 
 $( "#btn-monster" ).click(function() {
-	const monster = new Monster("slime", {"strenght":2,"stamina":1}, 1)
+	monster = new Monster("slime", {"strenght":2,"stamina":1}, 1)
 	console.log(monster)
 	let items = []
 	$.each( monster, function( key, val ) {
@@ -260,7 +285,7 @@ $( "#btn-monster" ).click(function() {
 	  });
 
 	  	let health = '<div class="progress">'+
-			'<div class="progress-bar bg-success" role="progressbar" style="width:'+monster.health/monster.max_health*100+'%" aria-valuenow="'+monster.health+'" aria-valuemin="0" aria-valuemax="'+monster.max_health+'"></div>'+
+			'<div id="monster-healther-bar" class="progress-bar bg-success" role="progressbar" style="width:'+monster.health/monster.max_health*100+'%" aria-valuenow="'+monster.health+'" aria-valuemin="0" aria-valuemax="'+monster.max_health+'">'+monster.health+'</div>'+
 		'</div>'
 
 		items.push(health)
