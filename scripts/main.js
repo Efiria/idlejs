@@ -209,6 +209,7 @@ class Monster {
 
 		//remove disabled on button btn-player-attack
 		$('#btn-player-attack').prop("disabled", false);
+		monster_display()
 	}
 
 	update_health(health) {
@@ -219,6 +220,28 @@ class Monster {
 		} else {
 			$('#monster-healther-bar').attr("aria-valuenow", this.health).css('width', this.health/this.max_health*100+'%').text(this.health)
 		}
+	}
+
+	monster_display() {
+		let items = []
+		$.each( this, function( key, val ) {
+			if (key === "stats") {
+				console.log(val)
+				$.each(val, function ( stat, value) {
+					items.push( "<li id='" + stat + "'>" + stat + " : " + value + "</li>" );
+				})
+			}else{
+				items.push( "<li id='" + key + "'>" + key + " : "+ val + "</li>" );
+			}
+	  	});
+
+	  	let health = '<div class="progress">'+
+			'<div id="monster-healther-bar" class="progress-bar bg-success" role="progressbar" style="width:'+monster.health/monster.max_health*100+'%" aria-valuenow="'+monster.health+'" aria-valuemin="0" aria-valuemax="'+monster.max_health+'">'+monster.health+'</div>'+
+		'</div>'
+
+		items.push(health)
+		$('.monster-display').html(items)
+	
 	}
 }
 
@@ -272,26 +295,4 @@ $(".inventory-display").on('click', '.btn-item-sell', function () {
 $( "#btn-monster" ).click(function() {
 	monster = new Monster("slime", {"strenght":2,"stamina":1}, 1)
 	console.log(monster)
-	let items = []
-	$.each( monster, function( key, val ) {
-		if (key === "stats") {
-			console.log(val)
-			$.each(val, function ( stat, value) {
-				items.push( "<li id='" + stat + "'>" + stat + " : " + value + "</li>" );
-			})
-		}else{
-			items.push( "<li id='" + key + "'>" + key + " : "+ val + "</li>" );
-		}
-	  });
-
-	  	let health = '<div class="progress">'+
-			'<div id="monster-healther-bar" class="progress-bar bg-success" role="progressbar" style="width:'+monster.health/monster.max_health*100+'%" aria-valuenow="'+monster.health+'" aria-valuemin="0" aria-valuemax="'+monster.max_health+'">'+monster.health+'</div>'+
-		'</div>'
-
-		items.push(health)
-	 
-	  $( "<ul/>", {
-		"class": "my-new-list",
-		html: items.join( "" )
-	  }).appendTo( ".monster-display" );
 });
