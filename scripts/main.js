@@ -236,7 +236,7 @@ class Monster {
 	  	});
 
 	  	let health = '<div class="progress">'+
-			'<div id="monster-healther-bar" class="progress-bar bg-success" role="progressbar" style="width:'+monster.health/monster.max_health*100+'%" aria-valuenow="'+monster.health+'" aria-valuemin="0" aria-valuemax="'+monster.max_health+'">'+monster.health+'</div>'+
+			'<div id="monster-healther-bar" class="progress-bar bg-success" role="progressbar" style="width:'+this.health/this.max_health*100+'%" aria-valuenow="'+this.health+'" aria-valuemin="0" aria-valuemax="'+this.max_health+'">'+this.health+'</div>'+
 		'</div>'
 
 		items.push(health)
