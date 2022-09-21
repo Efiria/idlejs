@@ -189,7 +189,7 @@ class Player {
 		//damage = base_weapon_damage + (weapon_speed * Attack Power / 14)
 		// let normalized_damage = base_weapon_damage + (X * this.stats.strenght / 14)
 		let normalized_damage = Math.round(2 + (1.6 * this.stats.strenght / 14))
-		console.log(normalized_damage)
+		monster.update_health(normalized_damage)
 	}
 
 	update_player() {
@@ -273,9 +273,7 @@ $( "#btn-player-attack" ).click(function() {
 	console.log('clicked')
 	player.combat = setInterval(function(){ 
 		player.attack()
-		monster.update_health(player.stats.strenght)
 		if (monster.health <= 0) {
-			console.log('aaaa')
 			clear()
 		}
 
