@@ -272,18 +272,21 @@ $( "#btn-save" ).click(function() {
 
 $( "#btn-player-attack" ).click(function() {
 	console.log('clicked')
-	player.combat = setInterval(function(){ 
-		player.attack()
-		if (monster.health <= 0) {
-			clear()
-		}
-
-		function clear() {
-            clearInterval(player.combat) 
-       return clear;
+	if (!player.combat) {
+		player.combat = setInterval(function(){ 
+			player.attack()
+			if (monster.health <= 0) {
+				clear()
+				player.combat = null
+			}
+	
+			function clear() {
+				clearInterval(player.combat) 
+		   		return clear;
+			}
+	
+		}, (1.6*1000));
 	}
-
-	}, (1.6*1000));
 });
 
 
