@@ -209,7 +209,7 @@ class Monster {
 
 		//remove disabled on button btn-player-attack
 		$('#btn-player-attack').prop("disabled", false);
-		monster_display()
+		this.monster_display()
 	}
 
 	update_health(health) {
