@@ -217,6 +217,7 @@ class Monster {
 		if (this.health <= 0) {
 			console.log('dead')
 			$('#monster-healther-bar').attr("aria-valuenow", 0).css('width', '0%').text('')
+			$('#btn-player-attack').prop("disabled", true);
 		} else {
 			$('#monster-healther-bar').attr("aria-valuenow", this.health).css('width', this.health/this.max_health*100+'%').text(this.health)
 		}
