@@ -188,7 +188,7 @@ class Player {
 		//AP egal main stat (str, agi, int)
 		//damage = base_weapon_damage + (weapon_speed * Attack Power / 14)
 		// let normalized_damage = base_weapon_damage + (X * this.stats.strenght / 14)
-		let normalized_damage = Math.round(2 + (1.6 * this.stats.strenght / 14))
+		let normalized_damage = Math.round(2 + (2 * this.stats.strenght / 14))
 		monster.update_health(normalized_damage)
 	}
 
@@ -271,22 +271,22 @@ $( "#btn-save" ).click(function() {
 });
 
 $( "#btn-player-attack" ).click(function() {
-	console.log('clicked')
-	if (!player.combat) {
+	$('#btn-player-attack').prop("disabled", true);
+	player.attack()
+
 		player.combat = setInterval(function(){ 
 			player.attack()
 			if (monster.health <= 0) {
 				clear()
-				player.combat = null
 			}
 	
 			function clear() {
 				clearInterval(player.combat) 
+				$('#btn-player-attack').prop("disabled", false);
 		   		return clear;
 			}
 	
 		}, (1.6*1000));
-	}
 });
 
 
@@ -295,6 +295,5 @@ $(".inventory-display").on('click', '.btn-item-sell', function () {
 });
 
 $( "#btn-monster" ).click(function() {
-	monster = new Monster("slime", {"strenght":2,"stamina":1}, 1)
-	console.log(monster)
+	monster = new Monster("slime", {"strenght":2,"stamina":5}, 1)
 });
